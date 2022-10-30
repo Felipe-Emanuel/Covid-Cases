@@ -119,12 +119,12 @@ export function DataTable() {
                 <SelectInfo
                     title={'Specific date or acumulated total'}
                     handleDate={
-                        <button className='w-[40vw] border-r-2 border-l-2 border-white' onFocus={handleDataChoise}>
+                        <button className='w-[40vw] border-r-2 border-l-2 border-white' onChange={handleDataChoise}>
                             Specific date
                         </button>
                     }
                     HandleTotal={
-                        <button className='w-[40vw] border-r-2 border-l-2 border-white' onFocus={handleTotalChoise}>
+                        <button className='w-[40vw] border-r-2 border-l-2 border-white' onChange={handleTotalChoise}>
                             Acumulated total
                         </button>
                     }
