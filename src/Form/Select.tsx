@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { styled } from '@stitches/react';
+import { ReactNode, SetStateAction, useEffect, useRef, useState } from 'react';
+import { ScaleValue, styled } from '@stitches/react';
 import { mauve, blue } from '@radix-ui/colors';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
@@ -130,48 +130,59 @@ export const SelectScrollDownButton = StyledScrollDownButton;
 const Box = styled('div', {});
 
 export interface SelectDateProps {
-    children?: ReactNode
-    onClick?: Function
-    title?: ReactNode
-    HandleTotal?: ReactNode
-    handleDate?: ReactNode
-    className?: string
+    children?: any
+    title?: any
+    handleData?: any
+    handleTotal?: any
   }
-  
-  export const SelectInfo = ({handleDate, HandleTotal, title}: SelectDateProps) => (
+
+  export const SelectInfo = ({ title, handleData, handleTotal }: SelectDateProps) => {
+
+    const [choise, setChoise] = useState('')
+
+    {useEffect(() => {
+      {choise === 'Specific date' ?
+        handleData() :
+        choise === 'Acumulated total' ?
+        handleTotal() :false
+      }
+    }, [choise])}
+
+  return(
     <Box className='text-center'>
-      <Select>
-        <SelectTrigger >
-          <SelectValue placeholder="Select what you want to see" />
-          <SelectIcon>
-            <ChevronDownIcon />
-          </SelectIcon>
-        </SelectTrigger>
-        <SelectContent >
-          <SelectScrollUpButton>
-            <ChevronUpIcon />
-          </SelectScrollUpButton>
-          <SelectViewport className='h-10 overflow-y-hidden'>
-            <SelectGroup >
-              <SelectLabel className='text-center'>{title}</SelectLabel>
-              <SelectItem className=' text-center flex justify-center m-auto' value={'Specific date'}>
-                <SelectItemText >{handleDate}</SelectItemText>
-                <SelectItemIndicator>
-                  <CheckIcon />
-                </SelectItemIndicator>
-              </SelectItem>
-              <SelectItem className=' text-center flex justify-center m-auto' value={'Acumulated total'}>
-                <SelectItemText >{HandleTotal}</SelectItemText>
-                <SelectItemIndicator>
-                  <CheckIcon />
-                </SelectItemIndicator>
-              </SelectItem>
-            </SelectGroup>
-          </SelectViewport>
-          <SelectScrollDownButton>
-            <ChevronDownIcon />
-          </SelectScrollDownButton>
-        </SelectContent>
-      </Select>
+    <Select onValueChange={setChoise }>
+      <SelectTrigger >
+        <SelectValue placeholder="Select what you want to see" />
+        <SelectIcon>
+          <ChevronDownIcon />
+        </SelectIcon>
+      </SelectTrigger>
+      <SelectContent >
+        <SelectScrollUpButton>
+          <ChevronUpIcon />
+        </SelectScrollUpButton>
+        <SelectViewport className='h-10 overflow-y-hidden'>
+          <SelectGroup >
+            <SelectLabel className='text-center'>{title}</SelectLabel>
+            <SelectItem value={'Specific date'}>
+              <SelectItemText >Specific date</SelectItemText>
+              <SelectItemIndicator>
+                <CheckIcon />
+              </SelectItemIndicator>
+            </SelectItem>
+            <SelectItem value={'Acumulated total'}>
+              <SelectItemText >Acumulated total</SelectItemText>
+              <SelectItemIndicator>
+                <CheckIcon />
+              </SelectItemIndicator>
+            </SelectItem>
+          </SelectGroup>
+        </SelectViewport>
+        <SelectScrollDownButton>
+          <ChevronDownIcon />
+        </SelectScrollDownButton>
+      </SelectContent>
+    </Select>
     </Box>
   );
+}

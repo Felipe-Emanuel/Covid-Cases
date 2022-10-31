@@ -3,6 +3,7 @@ import { key } from '../Api/Key'
 import ScrollAreaInfo from '../Form/ScrollArea'
 import Map from '../WorldMap/geo-map'
 import { ChosenDate } from './DataChoise'
+import { Input } from './Input'
 import { SelectInfo } from './Select'
 
 
@@ -113,21 +114,17 @@ export function DataTable() {
 
     }
 
+    function test() {
+        alert('teste1')
+    }
+
     return (
         <div>
             <div className='flex justify-center'>
                 <SelectInfo
                     title={'Specific date or acumulated total'}
-                    handleDate={
-                        <button className='w-[40vw] border-r-2 border-l-2 border-white' onChange={handleDataChoise}>
-                            Specific date
-                        </button>
-                    }
-                    HandleTotal={
-                        <button className='w-[40vw] border-r-2 border-l-2 border-white' onChange={handleTotalChoise}>
-                            Acumulated total
-                        </button>
-                    }
+                    handleData = {handleDataChoise}
+                    handleTotal={handleTotalChoise}
                 />
             </div>
             <div  className='w-[75vw] m-auto lg:w-[58vw] py-6 lg:py-0 lg:mt-6'>
@@ -137,10 +134,15 @@ export function DataTable() {
                 py-3 text-[10px] truncate
                 sm:text-[14px]
                 md:text-[16px]'>
-                {/* <input type="number" placeholder='2020-07-06'/> */}
-                <ChosenDate value={dataValue}/>
-                <ChosenDate value={CountryValue}/>
-                {/* <input type="text" placeholder='Angola'/> */}
+                <div className='flex justify-center py-2 items-center'>
+                    <Input className='text-center border-2 ' />
+                </div>
+                    <ChosenDate value={dataValue}/>
+                <div className='flex justify-center py-2 items-center'>
+                    <p>adicionar input pra busca de país</p>
+                    {/* <Input className='text-center border-2 ' /> */}
+                </div>
+                    <ChosenDate value={CountryValue}/>
             </div>
             <div className='
             list-none py-8 px-2 h-[45vh] gap-1 m-auto text-[8px] truncate grid grid-cols-2 grid-rows-3
